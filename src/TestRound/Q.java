@@ -34,6 +34,7 @@ public class Q {
 				}
 			} catch (Exception ex) {System.out.println("Finished Reading");}
 			result = ga.run();
+			System.out.println("Result:"+result.size());
 			r.close();
 		} catch (Exception e) {
 			e.printStackTrace();
