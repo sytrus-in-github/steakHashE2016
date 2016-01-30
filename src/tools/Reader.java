@@ -34,8 +34,7 @@ public class Reader {
 	{
 		String s="";char c;
 		try {
-			c=(char) br.read();
-			while(!isDelimitor(c))
+			while(!isDelimitor(c=(char) br.read()))
 			{
 				if(c==(char)-1)
 					break;

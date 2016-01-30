@@ -32,7 +32,7 @@ public class Q {
 					int y = r.readInt();
 					ga.addPoint(new Point(id, x, y));
 				}
-			} catch (Exception ex) {}
+			} catch (Exception ex) {System.out.println("Finished Reading");}
 			result = ga.run();
 			r.close();
 		} catch (Exception e) {
