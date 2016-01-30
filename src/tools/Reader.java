@@ -16,7 +16,7 @@ public class Reader {
 	public BufferedReader br;
 	private FileReader fw;
 	public char[] delimitor={' ', ','};
-	Reader(String path) {
+	public Reader(String path) {
 		try {
 			fw = new FileReader(path);
 			br = new BufferedReader(fw, 1024);
