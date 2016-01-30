@@ -15,10 +15,10 @@ public class GreedyAlgo {
 		points.add(a);
 	}
 	
-	public double nearestPoint(Point a){ //find the nearest point and remove it;
-										//return the nearest value
+	public Point nearestPoint(Point a){ //find the nearest point
+										//return the nearest point
 		if(points.size()==0)
-			return 0;
+			return null;
 		Point p = points.get(0);
 		double minD = Point.squareDistance(a, p);
 		for(int i=1;i<points.size();i++){
@@ -29,7 +29,23 @@ public class GreedyAlgo {
 				p = p1;
 			}		
 		}
-		points.remove(p);
-		return minD;	
+		return p;	
+	}
+	
+	public ArrayList<Integer> run(){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		int time = this.time;
+		while(points.size()>0){
+			Point a = points.get(0);
+			points.remove(a);
+			Point p = nearestPoint(a);
+			double minD = Point.distance(a, p);
+			time-=minD;
+			if(time<0)
+				break;
+			else
+				result.add(p.id);
+		}
+		return result;
 	}
 }
