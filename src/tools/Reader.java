@@ -52,7 +52,6 @@ public class Reader {
 			e.printStackTrace();
 		}
 		return s;
-
 	}
 	public String readLine()
 	{
@@ -75,6 +74,12 @@ public class Reader {
 		if (word.length() == 0)
 			throw new Exception("No more words left and you are asking for more");
 		return Long.parseLong(word);
+	}
+	public double readFloat() throws Exception {
+		String word = readWord();
+		if (word.length() == 0)
+			throw new Exception("No more words left and you are asking for more");
+		return Float.parseFloat(word);
 	}
 	public double readDouble() throws Exception {
 		String word = readWord();
