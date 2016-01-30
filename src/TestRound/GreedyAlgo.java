@@ -39,6 +39,8 @@ public class GreedyAlgo {
 			Point a = points.get(0);
 			points.remove(a);
 			Point p = nearestPoint(a);
+			if(p==null)
+				break;
 			double minD = Point.distance(a, p);
 			time-=minD;
 			if(time<0)
