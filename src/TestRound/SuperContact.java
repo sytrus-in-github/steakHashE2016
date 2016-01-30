@@ -1,7 +1,9 @@
 package TestRound;
 
-public class Chiaman {
+public class SuperContact {
+
 	public static void main(String[] args) {
-		System.out.println("Chia");
+		System.out.println(42);
 	}
+
 }
