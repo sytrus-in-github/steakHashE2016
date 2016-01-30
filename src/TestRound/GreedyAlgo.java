@@ -35,8 +35,8 @@ public class GreedyAlgo {
 	public ArrayList<Integer> run(){
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		int time = this.time;
+		Point a = points.get(0);
 		while(points.size()>0){
-			Point a = points.get(0);
 			points.remove(a);
 			Point p = nearestPoint(a);
 			if(p==null)
@@ -45,8 +45,10 @@ public class GreedyAlgo {
 			time-=minD;
 			if(time<0)
 				break;
-			else
+			else{
 				result.add(p.id);
+				a = p;
+			}
 		}
 		return result;
 	}
