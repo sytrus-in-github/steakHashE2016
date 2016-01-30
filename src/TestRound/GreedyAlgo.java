@@ -3,9 +3,11 @@ package TestRound;
 import java.util.ArrayList;
 
 public class GreedyAlgo {
+	int time;
 	ArrayList<Point> points;
 	
-	public GreedyAlgo() {
+	public GreedyAlgo(int time) {
+		this.time = time;
 		this.points = new ArrayList<Point>();
 	}
 	
