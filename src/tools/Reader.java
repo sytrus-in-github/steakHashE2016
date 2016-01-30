@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Reader {
 	public BufferedReader br;
 	private FileReader fw;
-	public int delimitor=' ';
+	public char[] delimitor={' ', ','};
 	Reader(String path) {
 		try {
 			fw = new FileReader(path);
@@ -24,11 +24,18 @@ public class Reader {
 			e.printStackTrace();
 		}
 	}
+	public boolean isDelimitor(char c) {
+		for (int i = 0; i < delimitor.length; i++) {
+			if (c == delimitor[i]) return true;
+		}
+		return false;
+	}
 	public String readWord()
 	{
 		String s="";char c;
 		try {
-			while((c=(char) br.read())!=delimitor)
+			c=(char) br.read();
+			while(!isDelimitor(c))
 			{
 				if(c==(char)-1)
 					break;
