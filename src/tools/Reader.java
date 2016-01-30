@@ -60,19 +60,19 @@ public class Reader {
 	public int readInt() throws Exception{
 		String word = readWord();
 		if (word.length() == 0)
-			throw new Exception("No more words left qnd you are asking for more");
+			throw new Exception("No more words left and you are asking for more");
 		return Integer.parseInt(word);
 	}
 	public long readLong() throws Exception{
 		String word = readWord();
 		if (word.length() == 0)
-			throw new Exception("No more words left qnd you are asking for more");
+			throw new Exception("No more words left and you are asking for more");
 		return Long.parseLong(word);
 	}
 	public double readDouble() throws Exception {
 		String word = readWord();
 		if (word.length() == 0)
-			throw new Exception("No more words left qnd you are asking for more");
+			throw new Exception("No more words left and you are asking for more");
 		return Double.parseDouble(word);
 	}
 	public char readChar() throws Exception{
