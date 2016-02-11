@@ -19,16 +19,18 @@ public class Q {
 	
 	
 	public static void main(String[] args) {
-		input();
-		output();
+		input("busy_day.in");
+		output("busy_day.in");
+		input("mother_of_all_warehouses.in");
+		output("mother_of_all_warehouses.in");
+		input("redundancy.in");
+		output("redundancy.in");
 	}
 
 	
-	public static void input() {
+	public static void input(String fileName) {
 		try {
-			Reader r = new Reader("busy_day.in");
-			// Reader r = new Reader("mother_of_all_warehouse.in");
-			// Reader r = new Reader("redundancy.in");
+			Reader r = new Reader(fileName);
 			nRow = r.readInt();
 			nCol = r.readInt();
 			D = r.readInt();
@@ -68,13 +70,13 @@ public class Q {
 		}
 	}
 	
-	public static void output() {
+	public static void output(String fileName) {
 		Algo algo = new Algo();
 		ArrayList<Command> result = algo.run();
 		
 		
 		try {
-			FileWriter fw = new FileWriter("commands.txt");
+			FileWriter fw = new FileWriter("out_" + fileName);
 			PrintWriter pw = new PrintWriter(fw);
 			
 			int n = result.size();
