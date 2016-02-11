@@ -13,7 +13,7 @@ public class Yuesong {
 		return false;
 	}
 	
-	public int closestOrder(Drone dr){
+	public static int closestOrder(Drone dr){
 		int id = -1,distmin = Q.nCol+Q.nRow,d;
 		for(int i = 0;i<Q.C;i++){
 			Order o = Q.orders[i];
