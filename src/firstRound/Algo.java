@@ -28,6 +28,8 @@ public class Algo {
 					order = o;
 					break;
 				}
+			if(order==null)
+				break;
 			
 			int pType=-1;
 			for(int i: order.items.keySet()){
