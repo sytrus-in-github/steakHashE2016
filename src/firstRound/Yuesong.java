@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 public class Yuesong {
 	
-	public boolean isUseful(Order o, Warehouse w){
-		for(int i:o.items.keySet()){
-			if(o.items.get(i)>0 && w.products[i]>0){
-				return true;
-			}
+	public static boolean isUseful(Order o, Warehouse w,int producttype){
+		if(o.items.get(producttype)>0 && w.products[producttype]>0){
+			return true;
 		}
-		return false;
+		else
+			return false;
 	}
 	
 	public static int closestOrder(Drone dr){
@@ -28,10 +27,10 @@ public class Yuesong {
 		return id;
 	}
 	
-	public int findNearestUsefulWarehouse(Order o){
+	public static int findNearestUsefulWarehouse(Order o,int producttype){
 		int min = -1,distmin = Q.nCol+Q.nRow,d;
 		for(int i = 0;i<Q.W;i++){
-			if(isUseful(o,Q.warehouses[i])){
+			if(isUseful(o,Q.warehouses[i],producttype)){
 				d = Chiaman.turn(Q.warehouses[i].x,Q.warehouses[i].y,o.x,o.y);
 				if(d<distmin){
 					distmin = d;
@@ -42,7 +41,7 @@ public class Yuesong {
 		return min;
 	}
 	
-	public int displace(Order o, Warehouse w){
+	public static int displace(Order o, Warehouse w){
 		return 0;
 	}
 	
