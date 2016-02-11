@@ -3,17 +3,31 @@ package firstRound;
 import java.util.HashMap;
 
 public class Order {
-	int x,y;
-	HashMap<Integer, Integer> items; //to a type, associate the number needed
+	public int x,y;
+	public HashMap<Integer, Integer> items; //to a type, associate the number needed
 	
-	Order(String coordinate){
+	public Order(int _x, int _y) {
+		x = _x;
+		y = _y;
+		items = new HashMap<Integer, Integer>();
+	}
+	
+	public Order(String coordinate){
 		String[] s = coordinate.split(" ");
 		x = Integer.parseInt(s[0]);
 		y = Integer.parseInt(s[1]);
 		items = new HashMap<Integer, Integer>();
 	}
 	
-	void addItems(String input){
+	public void addOneItem(int itemType){
+		Integer itemTypeInteger = new Integer(itemType);
+			if(!items.containsKey(itemTypeInteger))
+				items.put(itemTypeInteger, 1);
+			else
+				items.put(itemTypeInteger, items.get(itemTypeInteger) + 1);
+	}
+	
+	public void addItems(String input){
 		String[] s = input.split(" ");
 		for(String str : s){
 			if(!items.containsKey(Integer.parseInt(str)))
@@ -23,9 +37,5 @@ public class Order {
 		}
 	}
 	
-	void receiveDelivery(int type, int number){
-		int former = items.get(type);
-		items.put(type, former-number);
-	}
 	
 }
