@@ -5,11 +5,11 @@ public class Warehouse {
 	int x,y;
 	int[] products;
 	
-	Warehouse(int id, int x, int y, int numberOfTypes){
+	Warehouse(int id, int x, int y){
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.products = new int[numberOfTypes];
+		this.products = new int[Q.P];
 	}
 	
 	void addInitialItems(String input){
