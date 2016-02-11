@@ -3,12 +3,14 @@ package firstRound;
 import java.util.HashMap;
 
 public class Order {
+	public int id;
 	public int x, y;
 	public HashMap<Integer, Integer> items; // to a type, associate the number
 											// needed
 	public int totalItem = 0;
 
-	public Order(int _x, int _y) {
+	public Order(int id, int _x, int _y) {
+		this.id = id;
 		x = _x;
 		y = _y;
 		items = new HashMap<Integer, Integer>();
@@ -31,8 +33,11 @@ public class Order {
 
 	public void receiveDelivery(int itemType, int number) {
 		int oldNumber = items.get(itemType);
-		items.put(itemType, oldNumber-number);
+		if(oldNumber-number!=0)
+			items.put(itemType, oldNumber-number);
+		else
+			items.remove(itemType);
 		totalItem-=number;
 	}
-
+	
 }
