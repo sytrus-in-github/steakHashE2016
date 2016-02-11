@@ -41,13 +41,14 @@ public class Algo {
 //				pType = i;
 //				break;
 //			}
+			
 			Order bestOrder = null;
 			int bestType = -1;
 			int bestScore = Integer.MAX_VALUE;
 			Order[] orders = Q.orders;
 			for (Order o : orders) {
 				o.initializeNearestWarehouse();
-				int typeTemp = o.bestItemType(d);
+				int typeTemp = o.bestItemType2(d);
 				if (typeTemp == -1) continue;
 				int score = o.generalScore(d, typeTemp);
 				if (score < bestScore) {
@@ -59,6 +60,7 @@ public class Algo {
 			int pType = bestType;
 			Order order = bestOrder;
 			if (bestType == -1) break;
+			
 			
 			int nItem = order.items.get(pType);
 			nItem = Math.min(nItem, Q.maxLoad/Q.products[pType]);

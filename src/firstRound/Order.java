@@ -68,10 +68,27 @@ public class Order {
 		return minType;
 	}
 	
+	public int bestItemType2(Drone drone) {
+//		int minTurn = Integer.MAX_VALUE;
+		double MaxEfficiency = Double.MIN_VALUE;
+		int minType = -1;
+		for (int i : nearestWarehouse.keySet()) {
+			Warehouse house = nearestWarehouse.get(i);
+			int t = Chiaman.turn(house.x, house.y, drone.x, drone.y);
+			double n = Math.min(items.get(i), Q.maxLoad / Q.products[i]);
+			double efficiency = n/t;
+			if (efficiency > MaxEfficiency) {
+				MaxEfficiency = efficiency;
+				minType = i;
+			}
+		}
+		return minType;
+	}
+	
 	public int generalScore(Drone drone, int type) {
 		Warehouse house = nearestWarehouse.get(type);
 		int turn = Chiaman.turn(house.x, house.y, drone.x, drone.y);
-		return 11*turn + 2*cost;
+		return 11*turn + cost;
 	}
 	
 	public static ArrayList<Order> nearestOrders(int x, int y, int minimumNumber) {
