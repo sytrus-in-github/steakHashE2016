@@ -7,7 +7,8 @@ public class Drone implements Comparable<Drone>{
 	int[] loads;	//loads[i] := number of product i
 	int available;	//first available round
 	
-	public Drone(int initX, int initY){
+	public Drone(int id,int initX, int initY){
+		this.id = id;
 		x = initX;
 		y = initY;
 		loads = new int[Q.P];
