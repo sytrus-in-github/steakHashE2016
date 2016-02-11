@@ -26,9 +26,9 @@ public class Q {
 	
 	public static void input() {
 		try {
-			Reader r = new Reader("busy_day.in");
-			// Reader r = new Reader("mother_of_all_warehouse.in");
-			// Reader r = new Reader("redundancy.in");
+//			Reader r = new Reader("busy_day.in");
+			 Reader r = new Reader("mother_of_all_warehouse.in");
+//			 Reader r = new Reader("redundancy.in");
 			nRow = r.readInt();
 			nCol = r.readInt();
 			D = r.readInt();

@@ -45,6 +45,8 @@ public class Algo {
 			int toWarehouse = Chiaman.turn(d.x, d.y, w.x, w.y);
 			int warehouseToOrder = Chiaman.turn(w.x,w.y,order.x,order.y);
 			d.available += (toWarehouse+warehouseToOrder+2);
+			d.x = order.x;
+			d.y = order.y;
 			if(d.available<=Q.T)
 				drones.add(d);
 			Command load = new Command(CommandType.Load,d.id , w.id, pType, nItem);
