@@ -6,16 +6,17 @@ import java.io.PrintWriter;
 
 
 public class Q {
-	static int nRow, nCol, D, T, maxLoad;
-	static int P;
-	static int[] products;
-	static int W;
+	static int nRow, nCol, D, T, maxLoad; // D = number of drones, T = deadline, maxLoad = max load of a drone
+	static int P; // P = number of different product types
+	static int[] products; // weight of products
+	static int W; // W = number of warehouses
 	static Warehouse[] warehouses;
-	static Order[] commands;
+	static int C; // C = number of customer orders
+	static Order[] orders;
 	
 	static int n;
-	static int[][] data;
 	static int[] result;
+	
 	
 	public static void main(String[] args) {
 		input();
@@ -48,40 +49,45 @@ public class Q {
 			W = r.readInt();
 			warehouses = new Warehouse[W];
 			for (int i = 0; i < W; i++) {
-//				warehouse
-//				warehouses[i].id = i;
-//				warehouse[i].x = r.readInt();
-			}
-			
-			n = r.readInt();
-			data = new int[n][];
-			result = new int[n];
-			for (int i = 0; i<n; i++) {
-				int t = r.readInt();
-				data[i] = new int[t+1];
-				for (int j = 0; j<=t; j++) {
-					data[i][j] = r.readInt();
+				warehouses[i] = new Warehouse(i, r.readInt(), r.readInt());
+				for (int j = 0; j < P; j++) {
+					warehouses[i].products[j] = r.readInt();
 				}
 			}
+			
+			C = r.readInt();
+			orders = new Order[C];
+			int temp;
+			for (int i = 0; i < C; i++) {
+				orders[i] = new Order(r.readInt(), r.readInt());
+				temp = r.readInt();
+				for (int j = 0; j < temp; j++) {
+					orders[i].addOneItem(r.readInt());
+				}
+			}			
+			
+			result = new int[n];
+			
 			r.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public static void output() {
-		try {
-			FileWriter fw = new FileWriter("answer.txt");
-			PrintWriter pw = new PrintWriter(fw);
-		
-			for (int i = 0; i<n; i++) {
-				pw.println("Case #"+(i+1)+": "+result[i]);
-			}
-			pw.close();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-			
+//		try {
+//			FileWriter fw = new FileWriter("answer.txt");
+//			PrintWriter pw = new PrintWriter(fw);
+//		
+//			for (int i = 0; i < n; i++) {
+//				pw.println("Case #" + (i+1) + ": " + result[i]);
+//			}
+//			pw.close();
+//			fw.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//			
 	}
 
 }
