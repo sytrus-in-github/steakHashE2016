@@ -23,5 +23,9 @@ public class Order {
 		}
 	}
 	
+	void receiveDelivery(int type, int number){
+		int former = items.get(type);
+		items.put(type, former-number);
+	}
 	
 }
