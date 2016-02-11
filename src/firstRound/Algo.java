@@ -46,8 +46,11 @@ public class Algo {
 			if(d.available<=Q.T)
 				drones.add(d);
 			Command load = new Command(CommandType.Load,d.id , w.id, pType, nItem);
-			Command unload = new Command(CommandType.Deliver, d.id, order., itemType, itemNumber)
+			Command unload = new Command(CommandType.Deliver, d.id, order.id, pType, nItem);
+			res.add(load);
+			res.add(unload);
 		}
+		return res;
 	}
 	
 }
