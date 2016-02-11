@@ -28,18 +28,37 @@ public class Algo {
 //					order = o;
 //					break;
 //				}
-			int orderId = Yuesong.closestOrder(d);
-			if(orderId==-1)
-				break;
-			Order order = Q.orders[orderId];
-//			if(order==null)
-//				break;
 			
-			int pType=-1;
-			for(int i: order.items.keySet()){
-				pType = i;
-				break;
+//			int orderId = Yuesong.closestOrder(d);
+//			if(orderId==-1)
+//				break;
+//			Order order = Q.orders[orderId];
+////			if(order==null)
+////				break;
+//			
+//			int pType=-1;
+//			for(int i: order.items.keySet()){
+//				pType = i;
+//				break;
+//			}
+			Order bestOrder = null;
+			int bestType = -1;
+			int bestScore = Integer.MAX_VALUE;
+			Order[] orders = Q.orders;
+			for (Order o : orders) {
+				o.initializeNearestWarehouse();
+				int typeTemp = o.bestItemType(d);
+				if (typeTemp == -1) continue;
+				int score = o.generalScore(d, typeTemp);
+				if (score < bestScore) {
+					bestOrder = o;
+					bestType = typeTemp;
+					bestScore = score;
+				}
 			}
+			int pType = bestType;
+			Order order = bestOrder;
+			if (bestType == -1) break;
 			
 			int nItem = order.items.get(pType);
 			nItem = Math.min(nItem, Q.maxLoad/Q.products[pType]);
@@ -62,7 +81,7 @@ public class Algo {
 			while(pType2!=-1){
 				pType2=-1;
 				for(int i: order.items.keySet()){
-					if(i!=pType&&Q.products[i]<=remainingWeight&&w.products[i]>0){
+					if(Q.products[i]<=remainingWeight&&w.products[i]>0){
 						pType2 = i;
 						break;
 					}

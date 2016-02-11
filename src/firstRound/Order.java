@@ -49,6 +49,7 @@ public class Order {
 		for (int i : items.keySet()) {
 			int n = Math.min(items.get(i), Q.maxLoad / Q.products[i]);
 			Warehouse house = Q.warehouses[Chiaman.nearestWarehouseEnough(x, y, i, n)];
+			nearestWarehouse.put(i, house);
 			cost += (items.get(i) / n) * Chiaman.turn(x, y, house.x, house.y);
 		}
 	}
@@ -70,7 +71,7 @@ public class Order {
 	public int generalScore(Drone drone, int type) {
 		Warehouse house = nearestWarehouse.get(type);
 		int turn = Chiaman.turn(house.x, house.y, drone.x, drone.y);
-		return turn * 3 + cost;
+		return 11*turn + 2*cost;
 	}
 	
 	public static ArrayList<Order> nearestOrders(int x, int y, int minimumNumber) {
