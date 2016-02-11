@@ -8,6 +8,10 @@ public class Chiaman {
 	public static double dist(double x1, double y1, double x2, double y2) {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
+	
+	public static int turn(double x1, double y1, double x2, double y2) {
+		return (int) Math.ceil(Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+	}
 
 	public static int nearestWarehouseEnough(int x, int y, int pType, int nItems) {
 		int id = -1;
