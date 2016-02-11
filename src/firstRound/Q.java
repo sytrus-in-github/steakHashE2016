@@ -11,7 +11,7 @@ public class Q {
 	static int[] products;
 	static int W;
 	static Warehouse[] warehouses;
-	static Command[] commands;
+	static Order[] commands;
 	
 	static int n;
 	static int[][] data;
