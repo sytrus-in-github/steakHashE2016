@@ -1,5 +1,6 @@
 package firstRound;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
@@ -7,6 +8,8 @@ public class Order {
 	public int x, y;
 	public HashMap<Integer, Integer> items; // to a type, associate the number
 											// needed
+	public HashMap<Integer, Warehouse> nearestWarehouse;
+	public int cost;
 	public int totalItem = 0;
 
 	public Order(int id, int _x, int _y) {
@@ -38,6 +41,56 @@ public class Order {
 		else
 			items.remove(itemType);
 		totalItem-=number;
+	}
+	
+	public void initializeNearestWarehouse() {
+		cost = 0;
+		nearestWarehouse = new HashMap<Integer, Warehouse>();
+		for (int i : items.keySet()) {
+			int n = Math.min(items.get(i), Q.maxLoad / Q.products[i]);
+			Warehouse house = Q.warehouses[Chiaman.nearestWarehouseEnough(x, y, i, n)];
+			cost += (items.get(i) / n) * Chiaman.turn(x, y, house.x, house.y);
+		}
+	}
+	
+	public int bestItemType(Drone drone) {
+		int minTurn = Integer.MAX_VALUE;
+		int minType = -1;
+		for (int i : nearestWarehouse.keySet()) {
+			Warehouse house = nearestWarehouse.get(i);
+			int t = Chiaman.turn(house.x, house.y, drone.x, drone.y);
+			if (t < minTurn) {
+				minTurn = t;
+				minType = i;
+			}
+		}
+		return minType;
+	}
+	
+	public int generalScore(Drone drone, int type) {
+		Warehouse house = nearestWarehouse.get(type);
+		int turn = Chiaman.turn(house.x, house.y, drone.x, drone.y);
+		return turn * 3 + cost;
+	}
+	
+	public static ArrayList<Order> nearestOrders(int x, int y, int minimumNumber) {
+		int range = minimumNumber / 2;
+		int n = 0;
+		ArrayList<Order> result;
+		do {
+			n = 0;
+			result = new ArrayList<Order>();
+			for (Order o : Q.orders) {
+				if (Chiaman.turn(o.x, o.y, x, y) < range) {
+					n++;
+					result.add(o);
+				}
+			}
+			range *= 2;
+		} while (n < minimumNumber);
+		
+		return result;
+		
 	}
 	
 }
