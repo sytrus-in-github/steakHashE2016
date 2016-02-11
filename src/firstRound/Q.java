@@ -54,7 +54,7 @@ public class Q {
 			orders = new Order[C];
 			int temp;
 			for (int i = 0; i < C; i++) {
-				orders[i] = new Order(r.readInt(), r.readInt());
+				orders[i] = new Order(i, r.readInt(), r.readInt());
 				temp = r.readInt();
 				for (int j = 0; j < temp; j++) {
 					orders[i].addOneItem(r.readInt());
