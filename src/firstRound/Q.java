@@ -3,6 +3,7 @@ import tools.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 
 public class Q {
@@ -14,21 +15,14 @@ public class Q {
 	static int C; // C = number of customer orders
 	static Order[] orders;
 	
-	static int n;
-	static int[] result;
+	static int nCommand;
 	
 	
 	public static void main(String[] args) {
 		input();
-		solve();
 		output();
 	}
-	
-	public static void solve() {
-		for (int i = 0; i < n; i++) {
-			
-		}
-	}
+
 	
 	public static void input() {
 		try {
@@ -67,7 +61,6 @@ public class Q {
 				}
 			}			
 			
-			result = new int[n];
 			
 			r.close();
 		} catch (Exception e) {
@@ -76,19 +69,26 @@ public class Q {
 	}
 	
 	public static void output() {
-//		try {
-//			FileWriter fw = new FileWriter("answer.txt");
-//			PrintWriter pw = new PrintWriter(fw);
-//		
-//			for (int i = 0; i < n; i++) {
-//				pw.println("Case #" + (i+1) + ": " + result[i]);
-//			}
-//			pw.close();
-//			fw.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//			
+		Algo algo = new Algo();
+		ArrayList<Command> result = algo.run();
+		
+		
+		try {
+			FileWriter fw = new FileWriter("commands.txt");
+			PrintWriter pw = new PrintWriter(fw);
+			
+			int n = result.size();
+			pw.println(n);
+			
+			for (int i = 0; i < n; i++) {
+				pw.println(result.get(i));
+			}
+			pw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
