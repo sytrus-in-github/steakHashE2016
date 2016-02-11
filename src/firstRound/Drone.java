@@ -1,6 +1,6 @@
 package firstRound;
 
-public class Drone implements Comparable{
+public class Drone implements Comparable<Drone>{
 	int id;	//identity
 	int x,y;	//position
 	int weight;
@@ -42,8 +42,8 @@ public class Drone implements Comparable{
 		}
 
 		@Override
-		public int compareTo(Object obj) {
-			Drone that = (Drone) obj;
+		public int compareTo(Drone that) {
+			// TODO Auto-generated method stub
 			if(this.available<that.available)	return -1;
 			if(this.available>that.available)	return 1;
 			return 0;
