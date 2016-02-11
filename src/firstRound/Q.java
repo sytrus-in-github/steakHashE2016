@@ -42,6 +42,7 @@ public class Q {
 			maxLoad = r.readInt();
 			
 			P = r.readInt();
+			products = new int[P];
 			for (int i = 0; i < P; i++) {
 				products[i] = r.readInt();
 			}
