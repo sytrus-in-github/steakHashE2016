@@ -3,15 +3,13 @@ package firstRound;
 public class Drone {
 	int id;	//identity
 	int x,y;	//position
-	final int capacity;
 	int weight;
 	int[] loads;	//loads[i] := number of product i
 	
-	public Drone(int initX, int initY, int capacity, int nbproduct){
+	public Drone(int initX, int initY){
 		x = initX;
 		y = initY;
-		this.capacity = capacity;
-		loads = new int[nbproduct];
+		loads = new int[Q.P];
 		weight = 0;
 	}
 	
@@ -24,13 +22,20 @@ public class Drone {
 	}
 	
 	//load specified number of a product if possible, return false otherwise
-	public boolean load(int producttype,int productnb, int productweight){
-		if( weight+productweight*productnb > capacity){
-			return false;
+	public void load(int producttype,int productnb) throws Exception{
+		if( weight+Q.products[producttype]*productnb > Q.maxLoad){
+			throw new Exception("Too heavy! Current weight: " + weight + ", capacity: "+Q.maxLoad+", try to load "+productnb+" product of type "+producttype);
 		}
 		loads[producttype] += productnb;
-		weight+=productweight*productnb;
-		return false;
+		weight+=Q.products[producttype]*productnb;
 	}
 	
+	//unload specified number of a product if possible, return false otherwise
+		public void unload(int producttype,int productnb) throws Exception{
+			if(loads[producttype] < productnb){
+				throw new Exception("Not enough stock! Current stock of product " + producttype + "is: "+loads[producttype]+" < "+productnb);
+			}
+			loads[producttype] -= productnb;
+			weight -= Q.products[producttype]*productnb;
+		}
 }
