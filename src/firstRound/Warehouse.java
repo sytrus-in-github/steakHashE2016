@@ -22,4 +22,8 @@ public class Warehouse {
 		products[type] += number;
 	}
 	
+	void removeItem(int type, int number){
+		products[type] -= number;
+	}
+	
 }
