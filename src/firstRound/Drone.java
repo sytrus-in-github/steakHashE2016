@@ -1,16 +1,18 @@
 package firstRound;
 
-public class Drone {
+public class Drone implements Comparable<Drone>{
 	int id;	//identity
 	int x,y;	//position
 	int weight;
 	int[] loads;	//loads[i] := number of product i
+	int available;	//first available round
 	
 	public Drone(int initX, int initY){
 		x = initX;
 		y = initY;
 		loads = new int[Q.P];
 		weight = 0;
+		available = 0;
 	}
 	
 	//goto specified position and return rounds needed
@@ -37,5 +39,13 @@ public class Drone {
 			}
 			loads[producttype] -= productnb;
 			weight -= Q.products[producttype]*productnb;
+		}
+
+		@Override
+		public int compareTo(Drone that) {
+			// TODO Auto-generated method stub
+			if(this.available<that.available)	return -1;
+			if(this.available>that.available)	return 1;
+			return 0;
 		}
 }
