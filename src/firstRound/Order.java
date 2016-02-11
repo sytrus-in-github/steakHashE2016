@@ -2,11 +2,11 @@ package firstRound;
 
 import java.util.HashMap;
 
-public class Command {
+public class Order {
 	int x,y;
 	HashMap<Integer, Integer> items; //to a type, associate the number needed
 	
-	Command(String coordinate){
+	Order(String coordinate){
 		String[] s = coordinate.split(" ");
 		x = Integer.parseInt(s[0]);
 		y = Integer.parseInt(s[1]);
