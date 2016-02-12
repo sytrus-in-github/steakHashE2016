@@ -27,6 +27,21 @@ public class Yuesong {
 		return id;
 	}
 	
+	public static int closestOrderThatNeedsType(Drone dr, int type){
+		int id = -1,distmin = Q.nCol+Q.nRow,d;
+		for(int i = 0;i<Q.C;i++){
+			Order o = Q.orders[i];
+			if(o.items.containsKey(type)){
+				d = Chiaman.turn(dr.x,dr.y,o.x,o.y);
+				if(d<distmin){
+					distmin = d;
+					id = i;
+				}
+			}
+		}
+		return id;
+	}
+	
 	public static int findNearestUsefulWarehouse(Order o,int producttype){
 		int min = -1,distmin = Q.nCol+Q.nRow,d;
 		for(int i = 0;i<Q.W;i++){

@@ -19,12 +19,12 @@ public class Q {
 	
 	
 	public static void main(String[] args) {
-		input("busy_day.in");
-		output("busy_day.in");
+//		input("busy_day.in");
+//		output("busy_day.in");
 		input("mother_of_all_warehouses.in");
 		output("mother_of_all_warehouses.in");
-		input("redundancy.in");
-		output("redundancy.in");
+//		input("redundancy.in");
+//		output("redundancy.in");
 	}
 
 	
@@ -72,8 +72,11 @@ public class Q {
 	
 	public static void output(String fileName) {
 		Algo algo = new Algo();
-		ArrayList<Command> result = algo.run();
-		
+		ArrayList<Command> result;
+		if(fileName.equals("mother_of_all_warehouses.in"))
+			result = algo.run2();
+		else
+			result = algo.run();
 		
 		try {
 			FileWriter fw = new FileWriter("out_" + fileName);
