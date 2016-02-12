@@ -85,6 +85,19 @@ public class Order {
 		return minType;
 	}
 	
+	public int bestItemType3(Drone drone) { //mother case, heaviest
+		int type = -1;
+		for(int t : items.keySet()){
+			type = t;
+			break;
+		}
+		for(int t : items.keySet()){
+			if(Q.products[t]>Q.products[type])
+				type = t;
+		}
+		return type;
+	}
+	
 	public int generalScore(Drone drone, int type) {
 		Warehouse house = nearestWarehouse.get(type);
 		int turn = Chiaman.turn(house.x, house.y, drone.x, drone.y);

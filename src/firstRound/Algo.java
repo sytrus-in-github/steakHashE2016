@@ -129,7 +129,7 @@ public class Algo {
 				drones.add(d);
 				continue;		
 			}
-			
+
 			int nItem = order.items.get(pType);
 			nItem = Math.min(nItem, Q.maxLoad/Q.products[pType]);
 			
@@ -139,7 +139,7 @@ public class Algo {
 			order.receiveDelivery(pType, nItem);
 	
 			int remainingWeight = Q.maxLoad - Q.products[pType]*nItem;
-			
+			int pType2 =0;
 			ArrayList<Command> loads = new ArrayList<Command>();
 			Command load = new Command(CommandType.Load,d.id , w.id, pType, nItem);
 			loads.add(load);
@@ -147,32 +147,43 @@ public class Algo {
 			Command unload = new Command(CommandType.Deliver, d.id, order.id, pType, nItem);
 			unloads.add(unload);
 			
+			while(pType2!=-1){
+				pType2=-1;
+				for(int i: order.items.keySet()){
+					if(Q.products[i]<=remainingWeight&&w.products[i]>0){
+						if(pType2==-1)
+							pType2 = i;
+						else{
+							if(Q.products[pType2]<Q.products[i])
+								pType2 = i;
+						}
+					}
+				}
+	
+				if(pType2!=-1){ //if can load another type of item
+					int nItem2 = order.items.get(pType2);
+					nItem2 = Math.min(nItem2, remainingWeight/Q.products[pType2]);
+					nItem2 = Math.min(nItem2, w.products[pType2]);
+					w.removeItem(pType2, nItem2);
+					order.receiveDelivery(pType2, nItem2);
+					remainingWeight -= Q.products[pType2]*nItem2;
+					Command load2 = new Command(CommandType.Load,d.id , w.id, pType2, nItem2);
+					Command unload2 = new Command(CommandType.Deliver,d.id , order.id, pType2, nItem2);
+					loads.add(load2);
+					unloads.add(unload2);
+				}
+			}
 			int toWarehouse = Chiaman.turn(d.x, d.y, w.x, w.y);
 			int warehouseToOrder = Chiaman.turn(w.x,w.y,order.x,order.y);
-			d.available += (toWarehouse+warehouseToOrder);
+			d.available += (toWarehouse+warehouseToOrder+loads.size()*2);
 			d.x = order.x;
 			d.y = order.y;
 			
-			for(int pType2=0;pType2<Q.P;pType2++){
-				if(Q.products[pType2]<=remainingWeight&&w.products[pType2]>0&&Yuesong.closestOrderThatNeedsType(d, pType2)!=-1){
-					int order2id = Yuesong.closestOrderThatNeedsType(d, pType2);
-					Order order2 = Q.orders[order2id];
-					if(Chiaman.dist(order2.x, order2.y, d.x, d.y)>2*Chiaman.dist(d.x, d.y, w.x, w.y))
-						break;
-					int nItem2 = Math.min(remainingWeight/Q.products[pType2], w.products[pType2]);
-					nItem2 = Math.min(nItem2, order2.items.get(pType2));
-					w.removeItem(pType2, nItem2);	
-					order2.receiveDelivery(pType2, nItem2);
-					remainingWeight -= Q.products[pType2]*nItem2;
-					Command load2 = new Command(CommandType.Load,d.id , w.id, pType2, nItem2);
-					Command unload2 = new Command(CommandType.Deliver,d.id , order2.id, pType2, nItem2);
-					loads.add(load2);
-					unloads.add(unload2);
-					d.x = order2.x;
-					d.y = order2.y;
-					d.available += 2;
-				}
-			}	
+			while(remainingWeight>0){
+				
+			}
+			
+			
 			
 			if(d.available<=Q.T)
 				drones.add(d);

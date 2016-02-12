@@ -20,9 +20,9 @@ public class Test implements Comparator<Order>{
 			w2+=Q.products[type]*o2.items.get(type);
 		double d1 = Chiaman.dist(o1.x, o1.y, mother.x, mother.y);
 		double d2 = Chiaman.dist(o2.x, o2.y, mother.x, mother.y);
-		if(w1*d1<w2*d2)
+		if(w1<w2)
 			return -1;
-		if(w1*d1>w2*d2)
+		if(w1>w2)
 			return 1;
 		return 0;
 	}
