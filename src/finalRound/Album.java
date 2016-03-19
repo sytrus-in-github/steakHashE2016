@@ -24,4 +24,15 @@ public class Album {
 		return ret;
 	}
 	
+	public Photo addPhoto(Pair p){
+		Photo ret = new Photo(p, this);
+		photos.add(ret);
+		return ret;
+	}
+	
+	public Photo addPhoto(int lat,int lon){
+		Photo ret = new Photo(lat, lon, this);
+		photos.add(ret);
+		return ret;
+	}
 }
