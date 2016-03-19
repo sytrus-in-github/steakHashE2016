@@ -55,6 +55,12 @@ public class Album {
 		taken.put(p, true);
 	}
 	
+	public void untake(Photo p){
+		if(!photos.contains(p))
+			System.out.println("photo does not belong to the album!");
+		taken.put(p, false);
+	}
+	
 	public boolean isTaken(Photo p){
 		if(!photos.contains(p))
 			System.out.println("photo does not belong to the album!");
