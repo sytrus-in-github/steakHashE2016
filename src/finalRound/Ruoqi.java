@@ -10,13 +10,10 @@ public class Ruoqi {
 			boolean albumGood = true;
 			for (Photo p : a.photos) {
 				boolean photoGood = false;
-				nextPhoto:
-				for (Pair interval : a.intervals) {
-					for (int i = 0; i < Q.satellites.length; i++) {
-						if (Q.satellites[i].setPhotoIfAvailable(interval, p)) {
-							photoGood = true;
-							break nextPhoto;
-						}
+				for (int i = 0; i < Q.satellites.length; i++) {
+					if (Q.satellites[i].setPhotoIfAvailable(a.intervals, p)) {
+						photoGood = true;
+						break;
 					}
 				}
 				if (!photoGood) {

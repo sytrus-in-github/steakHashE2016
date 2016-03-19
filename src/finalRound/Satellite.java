@@ -98,7 +98,7 @@ public class Satellite {
 		}
 	}
 	
-	public boolean setPhotoIfAvailable(Pair time, Photo photo) {
+	public boolean setPhotoIfAvailable(ArrayList<Pair> time, Photo photo) {
 		LinkedList<Pair> availableTime = null;
 		double bestScore = Double.MAX_VALUE;
 		int bestT = -1;
@@ -115,6 +115,11 @@ public class Satellite {
 		setPhoto(bestT, photo);
 		return true;
 	}
+	
+	public boolean forceSetPhoto(ArrayList<Pair> time, Photo photo) {
+		return false;
+	}
+	
 	public Rect getAvailableArea(int t) {
 		return null;
 	}
