@@ -1,5 +1,6 @@
 package finalRound;
 
+import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -43,6 +44,17 @@ public class Satellite {
 		if (dLon >= 180 * 3600) dLon -= 180 * 3600;
 		else if (dLon < - 180 * 3600) dLon += 180 * 3600;
 		photos.put(t, new PhotoTaken(photo, t, dLat, dLon));
+	}
+	public void removePhotos(Album album) {
+		ArrayList<Integer> toBeRemoved = new ArrayList<Integer>();
+		for (PhotoTaken p : photos.values()) {
+			if (p.photo.album == album) {
+				toBeRemoved.add(p.t);
+			}
+		}
+		for (Integer i : toBeRemoved) {
+			photos.remove(i);
+		}
 	}
 	
 	public Rect getAvailableArea(int t) {
