@@ -78,7 +78,7 @@ public class Album implements Comparable<Album>{
 	public void update(Photo p, int t, int sat){
 		if(p.album != this)
 			return;
-		if(inInterval(0, Q.T, t))
+		if(inInterval(0, this.nbInterval, t))
 			taken.put(p, sat);
 	}
 	
