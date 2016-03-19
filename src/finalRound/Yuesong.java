@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 public class Yuesong {
 	
-	public static LinkedList<Pair> possibleIntervals(Coord c, Satellite s){
+	public static LinkedList<Pair> possibleIntervalsSlow(Coord c, Satellite s){
 		return null;
 	}
 	

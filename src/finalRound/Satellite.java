@@ -78,6 +78,7 @@ public class Satellite {
 				Math.abs(dLon - after.getValue().dLon) /(double) (after.getKey() - t));
 		return Math.max(maxV1, maxV2);
 	}
+	
 	public void setPhoto(int t, Photo photo) {
 		Coord current = getPosition(t);
 		int dLat = photo.coord.lat - current.lat;
