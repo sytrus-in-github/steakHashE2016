@@ -18,14 +18,16 @@ class PhotoTaken {
 }
 
 public class Satellite {
-
+	
+	public int index;
 	public Coord initCoord;
 	public int v;
 	public int w;
 	public int d;
 	
 	TreeMap<Integer, PhotoTaken> photos;
-	public Satellite(int initLat, int initLon, int v, int w, int d) {
+	public Satellite(int index, int initLat, int initLon, int v, int w, int d) {
+		this.index = index;
 		initCoord = new Coord(initLat, initLon);
 		this.v = v;
 		this.w = w;
@@ -37,6 +39,14 @@ public class Satellite {
 		return initCoord.add(v * t, -15 * t);
 	}
 	
+	public int trySetPhoto(int t, Photo photo) {
+		Coord current = getPosition(t);
+		int dLat = photo.coord.lat - current.lat;
+		int dLon = photo.coord.lon - current.lon;
+		if (dLon >= 180 * 3600) dLon -= 180 * 3600;
+		else if (dLon < - 180 * 3600) dLon += 180 * 3600;
+		
+	}
 	public void setPhoto(int t, Photo photo) {
 		Coord current = getPosition(t);
 		int dLat = photo.coord.lat - current.lat;
@@ -57,6 +67,11 @@ public class Satellite {
 		}
 	}
 	
+	public boolean setPhotoIfAvailable(Pair time, Photo photo) {
+		for (int t = time.a; t < time.b; t++) {
+			
+		}
+	}
 	public Rect getAvailableArea(int t) {
 		return null;
 	}
