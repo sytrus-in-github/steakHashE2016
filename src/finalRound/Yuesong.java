@@ -8,12 +8,11 @@ import java.util.NoSuchElementException;
 public class Yuesong {
 	
 	public static LinkedList<Pair> possibleIntervals(Coord c, Satellite s){
-		LinkedList<Pair> l1 = generateIntervals(s.v, s.initCoord.lat, c.lat-s.d, s.d*2+1, Coord.LATMAX-Coord.LATMIN - s.d*2),
-						l2 = getLongitude(c, s.initCoord, s.d, Coord.LONMAX-Coord.LONMIN+1);
+		return null;
 	}
 	
 	public static LinkedList<Pair> getLatitude(Coord c, Satellite sat){
-		
+		return null;
 	}
 	
 	public static LinkedList<Pair> getLongitude(Coord c, Satellite sat){
