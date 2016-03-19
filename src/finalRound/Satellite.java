@@ -99,10 +99,11 @@ public class Satellite {
 		}
 	}
 	
-	public boolean setPhotoIfAvailable(ArrayList<Pair> time, Photo photo) {
+	public int setPhotoIfAvailable(ArrayList<Pair> time, Photo photo) {
 		//System.out.println(getPosition(10).lat / 3600 + " " + getPosition(10).lon / 3600);
 		//System.out.println(photo.coord.lat / 3600 + " " + photo.coord.lon / 3600);
 		//System.out.println(d);
+		//ArrayList<Pair> availableTime = new ArrayList<Pair>(Yuesong.mergeIntervals(new LinkedList<Pair>(time), Chiaman.getLongitude(photo.coord, this)));
 		ArrayList<Pair> availableTime = time;
 		double bestScore = Double.MAX_VALUE;
 		int bestT = -1;
@@ -116,9 +117,9 @@ public class Satellite {
 				}
 			}
 		}
-		if (bestT == -1) return false;
+		if (bestT == -1) return -1;
 		setPhoto(bestT, photo);
-		return true;
+		return bestT;
 	}
 	
 	public boolean forceSetPhoto(ArrayList<Pair> time, Photo photo) {

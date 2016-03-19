@@ -16,16 +16,22 @@ public class Ruoqi {
 			System.out.println("album" + nAlbum++);
 			boolean albumGood = true;
 			for (Photo p : a.photos) {
-				boolean photoGood = false;
-				for (int i = 0; i < Q.satellites.length; i++) {
-					if (Q.satellites[i].setPhotoIfAvailable(a.intervals, p)) {
-						photoGood = true;
+				if (!a.isTaken(p)) {
+					boolean photoGood = false;
+					for (int i = 0; i < Q.satellites.length; i++) {
+						int timeTaken = Q.satellites[i].setPhotoIfAvailable(a.intervals, p);
+						if (timeTaken >= 0) {
+							photoGood = true;
+							for (Album aa : sortedAlbums) {
+								aa.update(p, timeTaken, i);
+							}
+							break;
+						}
+					}
+					if (!photoGood) {
+						albumGood = false;
 						break;
 					}
-				}
-				if (!photoGood) {
-					albumGood = false;
-					break;
 				}
 			}
 			if (!albumGood) {
