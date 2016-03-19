@@ -20,26 +20,10 @@ public class Yuesong {
 		Coord s = sat.initCoord;
 		int d = sat.d;
 		int v = -15;
+		int cpos = c.lon,spos = s.lon;
 		LinkedList<Pair> ret = new LinkedList<>();
-		int t = 0;
-		int start, end;
-		int cpos = c.lon;
-		while(t<Q.T){
-			int spos = s.add(0, v*t).lon;
-			if(Math.abs(cpos-spos)<=d){//in range
-				start = t;
-				end = start + (d+spos-cpos)/v;
-				t = end +1;
-			}
-			else{//not in range, go in range
-				if(spos>cpos){
-					t += (cpos-spos-d-1)/v+1;
-				}
-				else{
-					t += (cpos+range-spos-d-1)/v+1;
-				}
-			}
-		}
+		int T = 180*3600/15;
+		
 		
 		return ret;
 	}
