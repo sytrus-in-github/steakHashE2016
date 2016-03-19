@@ -12,7 +12,14 @@ public class Yuesong {
 						l2 = getLongitude(c, s.initCoord, s.d, Coord.LONMAX-Coord.LONMIN+1);
 	}
 	
-	public static LinkedList<Pair> getLongitude(Coord c, Coord s, int d, int range){
+	public static LinkedList<Pair> getLatitude(Coord c, Satellite sat){
+		
+	}
+	
+	public static LinkedList<Pair> getLongitude(Coord c, Satellite sat){
+		int range = Coord.LONMAX-Coord.LONMIN+1;
+		Coord s = sat.initCoord;
+		int d = sat.d;
 		int v = -15;
 		LinkedList<Pair> ret = new LinkedList<>();
 		int t = 0;
