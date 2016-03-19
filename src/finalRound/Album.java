@@ -17,6 +17,7 @@ public class Album {
 		this.nbInterval = nbrange;
 		this.photos = new ArrayList<>(nbPhoto);
 		this.intervals = new ArrayList<>(nbInterval);
+		this.taken = new HashMap<>();
 	}
 	
 	public Photo addPhoto(Coord c){
@@ -66,4 +67,5 @@ public class Album {
 				return false;
 		return true;
 	}
+	
 }
