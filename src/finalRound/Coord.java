@@ -1,3 +1,4 @@
+package finalRound;
 
 public class Coord {
 	public static final int LATMIN = -324000, LATMAX = 324000,
