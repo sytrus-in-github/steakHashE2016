@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 public class Ruoqi {
 
 	public static void Solve() {
-		PriorityQueue<Album> sortedAlbums = null;
+		PriorityQueue<Album> sortedAlbums = Chiaman.sortedAlbum();
 		for (Album a : sortedAlbums) {
 			boolean albumGood = true;
 			for (Photo p : a.photos) {
