@@ -60,12 +60,14 @@ public class Q {
 			FileWriter fw = new FileWriter("out_" + fileName);
 			PrintWriter pw = new PrintWriter(fw);
 			
-			System.out.println(T);
-			int n = 0;
-			pw.println(n);
+			int nPhoto = 0;
+			for (int i = 0; i < satellites.length; i++) {
+				nPhoto += satellites[i].nPhoto();
+			}
+			pw.println(nPhoto);
 			
-			for (int i = 0; i < n; i++) {
-				pw.println();
+			for (int i = 0; i < satellites.length; i++) {
+				pw.print(satellites[i].output());
 			}
 			pw.close();
 			fw.close();

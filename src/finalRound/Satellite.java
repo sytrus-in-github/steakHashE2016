@@ -107,10 +107,15 @@ public class Satellite {
 		return null;
 	}
 	
+	public int nPhoto() {
+		return photos.size() - 2;
+	}
 	public String output() {
 		String res = "";
 		for (PhotoTaken p : photos.values()) {
-			res += p.photo.coord.lat + " " + p.photo.coord.lon + " " + p.t + " " + index + "\n";
+			if (p.photo.album != null) {
+				res += p.photo.coord.lat + " " + p.photo.coord.lon + " " + p.t + " " + index + "\n";
+			}
 		}
 		return res;
 	}
