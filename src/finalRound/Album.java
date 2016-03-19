@@ -1,7 +1,6 @@
 package finalRound;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Album {
 	public int value;
