@@ -15,9 +15,10 @@ public class Q {
 	
 	public static void main(String[] args) {
 		run("constellation.in");
-//		run("forever_alone.in");
-//		run("overlap.in");
-//		run("weekend.in");
+		//run("forever_alone.in");
+		//run("overlap.in");
+		//run("weekend.in");
+		ZipControl.zipSrc();
 	}
 	
 	public static void run(String fileName) {
@@ -31,10 +32,13 @@ public class Q {
 		try {
 			Reader r = new Reader(fileName);
 			T = r.readInt();
+			//System.out.println(T);
 			S = r.readInt();
+			//System.out.println(S);
 			satellites = new Satellite[S];
 			for (int i = 0; i < S; i++) {
 				satellites[i] = new Satellite(i, r.readInt(), r.readInt(), r.readInt(), r.readInt(), r.readInt());
+				//if (i == 0) System.out.println(satellites[0].initCoord.lat + " " + satellites[0].initCoord.lon);
 			}
 			C = r.readInt();
 			albums = new Album[C];

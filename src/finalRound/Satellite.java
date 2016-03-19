@@ -50,7 +50,7 @@ public class Satellite {
 		if (dLon >= 180 * 3600) dLon -= 180 * 3600;
 		else if (dLon < - 180 * 3600) dLon += 180 * 3600;
 		
-		return  (dLat >= d && dLat <= d && dLon >= d && dLon <= d);
+		return  (dLat >= -d && dLat <= d && dLon >= -d && dLon <= d);
 	}
 	
 	public double trySetPhoto(int t, Photo photo) {
@@ -59,9 +59,9 @@ public class Satellite {
 		Coord current = getPosition(t);
 		int dLat = photo.coord.lat - current.lat;
 		int dLon = photo.coord.lon - current.lon;
-		if (dLon >= 180 * 3600) dLon -= 180 * 3600;
-		else if (dLon < - 180 * 3600) dLon += 180 * 3600;
-		if (dLat > d || dLat < d || dLon > d || dLon < d) return -1;
+		if (dLon >= 180 * 3600) dLon -= 360 * 3600;
+		else if (dLon < - 180 * 3600) dLon += 360 * 3600;
+		if (dLat > d || dLat < -d || dLon > d || dLon < -d) return -1;
 		
 		Entry<Integer, PhotoTaken> before = photos.floorEntry(t);
 		Entry<Integer, PhotoTaken> after = photos.ceilingEntry(t);
@@ -82,8 +82,8 @@ public class Satellite {
 		Coord current = getPosition(t);
 		int dLat = photo.coord.lat - current.lat;
 		int dLon = photo.coord.lon - current.lon;
-		if (dLon >= 180 * 3600) dLon -= 180 * 3600;
-		else if (dLon < - 180 * 3600) dLon += 180 * 3600;
+		if (dLon >= 180 * 3600) dLon -= 360 * 3600;
+		else if (dLon < - 180 * 3600) dLon += 360 * 3600;
 		photos.put(t, new PhotoTaken(photo, t, dLat, dLon));
 	}
 	public void removePhotos(Album album) {
@@ -99,13 +99,17 @@ public class Satellite {
 	}
 	
 	public boolean setPhotoIfAvailable(ArrayList<Pair> time, Photo photo) {
-		LinkedList<Pair> availableTime = null;
+		//System.out.println(getPosition(10).lat / 3600 + " " + getPosition(10).lon / 3600);
+		//System.out.println(photo.coord.lat / 3600 + " " + photo.coord.lon / 3600);
+		//System.out.println(d);
+		ArrayList<Pair> availableTime = time;
 		double bestScore = Double.MAX_VALUE;
 		int bestT = -1;
 		for (Pair interval : availableTime) {
 			for (int t = interval.a; t <= interval.b; t++) {
+				//if (inRange(t, photo)) System.out.println("InRANGE");
 				double score = trySetPhoto(t, photo);
-				if (score < bestScore) {
+				if (score >= 0 && score < bestScore) {
 					bestScore = score;
 					bestT = t;
 				}

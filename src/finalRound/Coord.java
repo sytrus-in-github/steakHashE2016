@@ -16,28 +16,29 @@ public class Coord {
 	}
 	
 	Coord add(int la, int lo){
-		lat += la;
-		lon += lo;
-		lat %= 1296000;
-		if (lat >= 648000) {
-			lat -= 1296000;
-		} else if (lat < -648000) {
-			lat += 1296000;
+		Coord result = new Coord(lat, lon);
+		result.lat += la;
+		result.lon += lo;
+		result.lat %= 1296000;
+		if (result.lat >= 648000) {
+			result.lat -= 1296000;
+		} else if (result.lat < -648000) {
+			result.lat += 1296000;
 		}
-		if (lat > 324000) {
-			lon -= 648000;
-			lat = 648000 - lat;
-		} else if (lat < -324000) {
-			lon -= 648000;
-			lat = -648000 - lat;
+		if (result.lat > 324000) {
+			result.lon -= 648000;
+			result.lat = 648000 - result.lat;
+		} else if (result.lat < -324000) {
+			result.lon -= 648000;
+			result.lat = -648000 - result.lat;
 		}
-		lon %= 1296000;
-		if (lon >= 648000) {
-			lon -= 1296000;
-		} else if (lon < -648000) {
-			lon += 1296000;
+		result.lon %= 1296000;
+		if (result.lon >= 648000) {
+			result.lon -= 1296000;
+		} else if (result.lon < -648000) {
+			result.lon += 1296000;
 		}
-		return this;
+		return result;
 	}
 	
 	Coord add(Coord c){
