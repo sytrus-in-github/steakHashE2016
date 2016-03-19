@@ -91,7 +91,13 @@ public class Album implements Comparable<Album>{
 		}
 		else {
 			int m = (s+e)/2;
-			return inInterval(s, m, t)||inInterval(m, e, t);
+			Pair p = this.intervals.get(m);
+			if (t<p.a)
+				return inInterval(s, m, t);
+			else if(t>p.b)
+				return inInterval(m+1, e, t);
+			else
+				return true;
 		}
 	}
 	
