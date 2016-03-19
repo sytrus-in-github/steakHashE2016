@@ -38,6 +38,16 @@ public class Album {
 		return ret;
 	}
 	
+	public Pair addInterval(Pair p){
+		intervals.add(p);
+		return p;
+	}
+	
+	public Pair addInterval(int s, int e){
+		Pair p = new Pair(s,e);
+		return addInterval(p);
+	}
+	
 	public void take(Photo p){
 		if(!photos.contains(p))
 			System.out.println("photo does not belong to the album!");
