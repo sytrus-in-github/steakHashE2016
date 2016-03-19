@@ -8,12 +8,34 @@ import java.util.NoSuchElementException;
 public class Yuesong {
 	
 	public static LinkedList<Pair> possibleIntervals(Coord c, Satellite s){
-		LinkedList<Pair> l1 = generateIntervals(Q.T, s.v, s.initCoord.lat, c.lat-s.d, s.d*2+1, Coord.LATMAX-Coord.LATMIN - s.d*2),
-						l2 = generateIntervals(Q.T, -15, s.initCoord.lat, c.lat-s.d, s.d*2+1, Coord.LATMAX-Coord.LATMIN - s.d*2);
+		LinkedList<Pair> l1 = generateIntervals(s.v, s.initCoord.lat, c.lat-s.d, s.d*2+1, Coord.LATMAX-Coord.LATMIN - s.d*2),
+						l2 = getLongitude(c, s.initCoord, s.d, Coord.LONMAX-Coord.LONMIN+1);
 	}
 	
-	public static LinkedList<Pair> generateIntervals(int maxtime, int v, int initpos, int inpos, int inlength, int outlength){
+	public static LinkedList<Pair> getLongitude(Coord c, Coord s, int d, int range){
+		int v = -15;
+		LinkedList<Pair> ret = new LinkedList<>();
+		int t = 0;
+		int start, end;
+		int cpos = c.lon;
+		while(t<Q.T){
+			int spos = s.add(0, v*t).lon;
+			if(Math.abs(cpos-spos)<=d){//in range
+				start = t;
+				end = start + (d+spos-cpos)/v;
+				t = end +1;
+			}
+			else{//not in range, go in range
+				if(spos>cpos){
+					t += (cpos-spos-d-1)/v+1;
+				}
+				else{
+					t += (cpos+range-spos-d-1)/v+1;
+				}
+			}
+		}
 		
+		return ret;
 	}
 	// assume intervals in l1, l2 already sorted
 	public static LinkedList<Pair> mergeIntervals(LinkedList<Pair> l1, LinkedList<Pair> l2){
