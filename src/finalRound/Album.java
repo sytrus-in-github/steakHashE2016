@@ -3,7 +3,7 @@ package finalRound;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Album {
+public class Album implements Comparable<Album>{
 	public int value;
 	public int nbPhoto;
 	public int nbInterval;
@@ -74,4 +74,11 @@ public class Album {
 		return true;
 	}
 	
+	@Override
+	public int compareTo(Album that) {
+		// TODO Auto-generated method stub
+		if(this.value / (double)this.nbPhoto < that.value / (double) that.nbPhoto)	return -1;
+		if(this.value / (double)this.nbPhoto > that.value / (double) that.nbPhoto)	return 1;
+		return 0;
+	}
 }
