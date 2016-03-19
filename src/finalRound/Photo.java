@@ -14,4 +14,9 @@ public class Photo{
 		this.coord = new Coord(lat, lon);
 		this.album = a;
 	}
+	
+	public Photo(Pair p, Album a){
+		this.coord = new Coord(p);
+		this.album = a;
+	}
 }
