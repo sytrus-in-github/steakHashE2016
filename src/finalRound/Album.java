@@ -2,12 +2,13 @@ package finalRound;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Album implements Comparable<Album>{
 	public int value;
 	public int nbPhoto;
 	public int nbInterval;
-	public ArrayList<Photo> photos;
+	public HashSet<Photo> photos;
 	public ArrayList<Pair> intervals;
 	public HashMap<Photo,Integer> taken;
 	
@@ -15,7 +16,7 @@ public class Album implements Comparable<Album>{
 		this.value = value;
 		this.nbPhoto = nbfoto;
 		this.nbInterval = nbrange;
-		this.photos = new ArrayList<>(nbPhoto);
+		this.photos = new HashSet<>(nbPhoto);
 		this.intervals = new ArrayList<>(nbInterval);
 		this.taken = new HashMap<>();
 	}
@@ -72,6 +73,26 @@ public class Album implements Comparable<Album>{
 			if(taken.get(p) == -1)
 				return false;
 		return true;
+	}
+	
+	public void update(Photo p, int t, int sat){
+		if(p.album != this)
+			return;
+		if(inInterval(0, Q.T, t))
+			taken.put(p, sat);
+	}
+	
+	public boolean inInterval(int s, int e, int t){
+		if(s >= e)
+			return false;
+		else if(s + 1 == e){
+			Pair p = this.intervals.get(s);
+			return t>=p.a & t<=p.b;
+		}
+		else {
+			int m = (s+e)/2;
+			return inInterval(s, m, t)||inInterval(m, e, t);
+		}
 	}
 	
 	@Override
