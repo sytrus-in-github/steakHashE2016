@@ -9,7 +9,7 @@ public class Album {
 	public int nbInterval;
 	public ArrayList<Photo> photos;
 	public ArrayList<Pair> intervals;
-	public HashMap<Photo,Boolean> taken;
+	public HashMap<Photo,Integer> taken;
 	
 	public Album(int value, int nbfoto, int nbrange){
 		this.value = value;
@@ -35,7 +35,7 @@ public class Album {
 	public Photo addPhoto(int lat,int lon){
 		Photo ret = new Photo(lat, lon, this);
 		photos.add(ret);
-		taken.put(ret, false);
+		taken.put(ret, -1);
 		return ret;
 	}
 	
@@ -49,27 +49,27 @@ public class Album {
 		return addInterval(p);
 	}
 	
-	public void take(Photo p){
+	public void take(Photo p,int satindex){
 		if(!photos.contains(p))
 			System.out.println("photo does not belong to the album!");
-		taken.put(p, true);
+		taken.put(p, satindex);
 	}
 	
 	public void untake(Photo p){
 		if(!photos.contains(p))
 			System.out.println("photo does not belong to the album!");
-		taken.put(p, false);
+		taken.put(p, -1);
 	}
 	
 	public boolean isTaken(Photo p){
 		if(!photos.contains(p))
 			System.out.println("photo does not belong to the album!");
-		return taken.get(p);
+		return taken.get(p) != -1;
 	}
 	
 	public boolean done(){
 		for(Photo p: photos)
-			if(!taken.get(p))
+			if(taken.get(p) == -1)
 				return false;
 		return true;
 	}
