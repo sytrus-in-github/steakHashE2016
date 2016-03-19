@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class PhotoTaken {
+class PhotoTaken {
 	public Photo photo;
 	public int t;
 	public int dLat;
