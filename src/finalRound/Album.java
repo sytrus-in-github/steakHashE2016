@@ -59,4 +59,11 @@ public class Album {
 			System.out.println("photo does not belong to the album!");
 		return taken.get(p);
 	}
+	
+	public boolean done(){
+		for(Photo p: photos)
+			if(!taken.get(p))
+				return false;
+		return true;
+	}
 }
