@@ -15,8 +15,8 @@ public class Q {
 	
 	public static void main(String[] args) {
 		//run("constellation.in");
-		run("forever_alone.in");
-		//run("overlap.in");
+		//run("forever_alone.in");
+		run("overlap.in");
 		//run("weekend.in");
 		ZipControl.zipSrc();
 	}
