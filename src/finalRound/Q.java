@@ -3,7 +3,6 @@ import tools.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 
 public class Q {
@@ -15,14 +14,16 @@ public class Q {
 	
 	
 	public static void main(String[] args) {
-		input("constellation.in");
-		output("constellation.in");
-//		input("forever_alone.in");
-//		output("forever_alone.in");
-//		input("overlap.in");
-//		output("overlap.in");
-//		input("weekend.in");
-//		output("weekend.in");
+		run("constellation.in");
+//		run("forever_alone.in");
+//		run("overlap.in");
+//		run("weekend.in");
+	}
+	
+	public static void run(String fileName) {
+		input(fileName);
+		Ruoqi.Solve();
+		output(fileName);
 	}
 
 	

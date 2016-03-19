@@ -53,7 +53,7 @@ public class Satellite {
 		return  (dLat >= d && dLat <= d && dLon >= d && dLon <= d);
 	}
 	
-	public int trySetPhoto(int t, Photo photo) {
+	public double trySetPhoto(int t, Photo photo) {
 		if (photos.containsKey(t)) return -1;
 		
 		Coord current = getPosition(t);
@@ -69,7 +69,14 @@ public class Satellite {
 		if (Math.abs(dLon - before.getValue().dLon) > w * (t - before.getKey())) return -1;
 		if (Math.abs(dLat - after.getValue().dLat) > w * (after.getKey() - t)) return -1;
 		if (Math.abs(dLon - after.getValue().dLon) > w * (after.getKey() - t)) return -1;
-		return 1;
+		
+		double maxV1 = Math.max(
+				Math.abs(dLat - before.getValue().dLat) /(double) (t - before.getKey()), 
+				Math.abs(dLon - before.getValue().dLon) /(double) (t - before.getKey()));
+		double maxV2 = Math.max(
+				Math.abs(dLat - after.getValue().dLat) /(double) (after.getKey() - t), 
+				Math.abs(dLon - after.getValue().dLon) /(double) (after.getKey() - t));
+		return Math.max(maxV1, maxV2);
 	}
 	public void setPhoto(int t, Photo photo) {
 		Coord current = getPosition(t);
@@ -91,18 +98,28 @@ public class Satellite {
 		}
 	}
 	
-	public boolean setPhotoIfAvailable(Pair time, Photo photo) {
+	public boolean setPhotoIfAvailable(ArrayList<Pair> time, Photo photo) {
 		LinkedList<Pair> availableTime = null;
+		double bestScore = Double.MAX_VALUE;
+		int bestT = -1;
 		for (Pair interval : availableTime) {
 			for (int t = interval.a; t <= interval.b; t++) {
-				if (trySetPhoto(t, photo) >= 0) {
-					setPhoto(t, photo);
-					return true;
+				double score = trySetPhoto(t, photo);
+				if (score < bestScore) {
+					bestScore = score;
+					bestT = t;
 				}
 			}
 		}
+		if (bestT == -1) return false;
+		setPhoto(bestT, photo);
+		return true;
+	}
+	
+	public boolean forceSetPhoto(ArrayList<Pair> time, Photo photo) {
 		return false;
 	}
+	
 	public Rect getAvailableArea(int t) {
 		return null;
 	}
